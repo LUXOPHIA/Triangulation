@@ -6,24 +6,19 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   System.Math.Vectors,
-  FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation,
-  LUX, LUX.D2, LUX.Brep.Face.TriFlip.D2.Delaunay,
+  FMX.Objects,
+  LUX, LUX.D2,
   Core;
 
 type
   TForm1 = class(TForm)
     PaintBox1: TPaintBox;
-    Panel1: TPanel;
-      Button1: TButton;
-      Button2: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure PaintBox1Paint(Sender: TObject; Canvas: TCanvas);
     procedure PaintBox1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
-    procedure Button1Click(Sender: TObject);
     procedure PaintBox1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Single);
     procedure PaintBox1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
-    procedure Button2Click(Sender: TObject);
   private
     { private 宣言 }
     _MouseState :TShiftState;
@@ -36,7 +31,7 @@ type
   public
     { public 宣言 }
     _TriMesh   :TMyModel;
-    _CurvPoins :array of TSingle2D;
+    _CurvPoins :TArray<TSingle2D>;
   end;
 
 var
@@ -71,7 +66,7 @@ begin
           with Fill do
           begin
                Kind      := TBrushKind.Solid;
-               Color     := TAlphaColorRec.Blue;
+               Color     := TAlphaColorRec.Red;
           end;
 
           for I := 0 to _TriMesh.PoinModel.ChildsN-1 do
@@ -97,7 +92,7 @@ begin
           with Stroke do
           begin
                Kind      := TBrushKind.Solid;
-               Color     := TAlphaColorRec.Black;
+               Color     := TAlphaColorRec.White;
                Thickness := Thickness_;
                Join      := TStrokeJoin.Round;
           end;
@@ -111,15 +106,12 @@ begin
           begin
                with _TriMesh.Childs[ I ] do
                begin
-                    if Inside then
-                    begin
-                         Ps[ 0 ] := PosToScr( Poin[ 1 ].Pos );
-                         Ps[ 1 ] := PosToScr( Poin[ 2 ].Pos );
-                         Ps[ 2 ] := PosToScr( Poin[ 3 ].Pos );
+                    Ps[ 0 ] := PosToScr( Poin[ 1 ].Pos );
+                    Ps[ 1 ] := PosToScr( Poin[ 2 ].Pos );
+                    Ps[ 2 ] := PosToScr( Poin[ 3 ].Pos );
 
-                         FillPolygon( Ps, 1 );
-                         DrawPolygon( Ps, 1 );
-                    end;
+                    FillPolygon( Ps, 1 );
+                    DrawPolygon( Ps, 1 );
                end;
           end;
      end;
@@ -164,6 +156,8 @@ begin
      _MouseState := [];
 
      _TriMesh := TMyModel.Create;
+
+     _TriMesh.Radius := 20;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -177,7 +171,7 @@ procedure TForm1.PaintBox1Paint(Sender: TObject; Canvas: TCanvas);
 begin
      Canvas.Clear( TAlphaColorRec.White );
 
-     DrawFace( Canvas, 1 );
+     DrawFace( Canvas, 2 );
 
      DrawPoin( Canvas, 3 );
 
@@ -213,25 +207,10 @@ begin
 
      _CurvPoins := _CurvPoins + [ _CurvPoins[ 0 ] ];
 
-     _TriMesh.MakeMesh( _CurvPoins, 20 );
+     _TriMesh.MakeMesh( _CurvPoins );
+     _TriMesh.FairMesh;  //輪郭外の不要な三角形を消す。
 
      _CurvPoins := [];
-end;
-
-//------------------------------------------------------------------------------
-
-procedure TForm1.Button1Click(Sender: TObject);
-begin
-     _TriMesh.DeleteChilds;
-
-     PaintBox1.Repaint;
-end;
-
-procedure TForm1.Button2Click(Sender: TObject);
-begin
-     _TriMesh.PoissonSubDiv( 15 );
-
-     PaintBox1.Repaint;
 end;
 
 end. //######################################################################### ■
