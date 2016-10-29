@@ -132,23 +132,26 @@ var
    N, I :Integer;
    Vs :TPolygon;
 begin
-     N := Length( _CurvPoins );
-
-     SetLength( Vs, N );
-
-     for I := 0 to N-1 do Vs[ I ] := PosToScr( _CurvPoins[ I ] );
-
-     with Canvas_ do
+     if Assigned( _CurvPoins ) then
      begin
-          with Stroke do
-          begin
-               Kind      := TBrushKind.Solid;
-               Color     := TAlphaColorRec.Red;
-               Thickness := Thickness_;
-               Join      := TStrokeJoin.Round;
-          end;
+          N := Length( _CurvPoins );
 
-          DrawPolygon( Vs, 1 );
+          SetLength( Vs, N );
+
+          for I := 0 to N-1 do Vs[ I ] := PosToScr( _CurvPoins[ I ] );
+
+          with Canvas_ do
+          begin
+               with Stroke do
+               begin
+                    Kind      := TBrushKind.Solid;
+                    Color     := TAlphaColorRec.Red;
+                    Thickness := Thickness_;
+                    Join      := TStrokeJoin.Round;
+               end;
+
+               DrawPolygon( Vs, 1 );
+          end;
      end;
 end;
 
