@@ -39,12 +39,7 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      TMyModel = class( TTriGenModel<TMyPoin,TMyFace> )
      private
      protected
-       ///// アクセス
-       function GetChild( const I_:Integer ) :TMyFace; reintroduce;
-       procedure SetChild( const I_:Integer; const Child_:TMyFace ); reintroduce;
      public
-       ///// プロパティ
-       property Childs[ const I_:Integer ] :TMyFace read GetChild write SetChild;
      end;
 
 //const //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【定数】
@@ -104,18 +99,6 @@ end;
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& private
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& protected
-
-/////////////////////////////////////////////////////////////////////// アクセス
-
-function TMyModel.GetChild( const I_:Integer ) :TMyFace;
-begin
-     Result := TMyFace( inherited Childs[ I_ ] );
-end;
-
-procedure TMyModel.SetChild( const I_:Integer; const Child_:TMyFace );
-begin
-     inherited Childs[ I_ ] := Child_;
-end;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& public
 

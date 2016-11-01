@@ -182,9 +182,9 @@ end;
 
 procedure TForm1.PaintBox1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
-     _TriMesh.DeleteChilds;
-
      _MouseState := Shift;
+
+     _TriMesh.DeleteChilds;
 
      _CurvPoins := [ ScrToPos( TPointF.Create( X, Y ) ) ];
 end;
@@ -201,16 +201,23 @@ end;
 
 procedure TForm1.PaintBox1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
-     PaintBox1MouseMove( Sender, Shift, X, Y );
+     if ssLeft in _MouseState then
+     begin
+          _CurvPoins := _CurvPoins + [ ScrToPos( TPointF.Create( X, Y ) ) ];
 
-     _MouseState := [];
+          if Length( _CurvPoins ) > 2 then
+          begin
+               _TriMesh.MakeMesh( _CurvPoins );
 
-     _CurvPoins := _CurvPoins + [ _CurvPoins[ 0 ] ];
+               _TriMesh.FairMesh;  //輪郭外の不要な三角形を消す。
+          end;
 
-     _TriMesh.MakeMesh( _CurvPoins );
-     _TriMesh.FairMesh;  //輪郭外の不要な三角形を消す。
+          _CurvPoins := [];
 
-     _CurvPoins := [];
+          PaintBox1.Repaint;
+
+          _MouseState := [];
+     end;
 end;
 
 end. //######################################################################### ■
