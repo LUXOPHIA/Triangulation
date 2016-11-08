@@ -16,12 +16,20 @@ uses
   LUX.Geometry in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.pas',
   LUX.Geometry.D2 in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.D2.pas',
   LUX.Geometry.D3 in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.D3.pas',
-  LUX.Matrix.L3 in '_LIBRARY\LUXOPHIA\LUX.Matrix\LUX.Matrix.L3.pas',
-  LUX.Matrix.L2 in '_LIBRARY\LUXOPHIA\LUX.Matrix\LUX.Matrix.L2.pas',
   LUX.Brep.Face.TriFlip.D2 in '_LIBRARY\LUXOPHIA\LUX.Brep\LUX.Brep.Face.TriFlip.D2.pas',
   LUX.Brep.Face.TriFlip.D2.Delaunay in '_LIBRARY\LUXOPHIA\LUX.Brep\LUX.Brep.Face.TriFlip.D2.Delaunay.pas',
   Core in 'Core.pas',
-  LUX.Brep.Face.TriFlip.D2.Triangulation in '_LIBRARY\LUXOPHIA\LUX.Brep\LUX.Brep.Face.TriFlip.D2.Triangulation.pas';
+  LUX.Brep.Face.TriFlip.D2.Triangulation in '_LIBRARY\LUXOPHIA\LUX.Brep\LUX.Brep.Face.TriFlip.D2.Triangulation.pas',
+  LUX.D4.M4 in '_LIBRARY\LUXOPHIA\LUX\LUX.D4.M4.pas',
+  LUX.D4 in '_LIBRARY\LUXOPHIA\LUX\LUX.D4.pas',
+  LUX.D4.V4 in '_LIBRARY\LUXOPHIA\LUX\LUX.D4.V4.pas',
+  LUX.M2 in '_LIBRARY\LUXOPHIA\LUX\LUX.M2.pas',
+  LUX.M3 in '_LIBRARY\LUXOPHIA\LUX\LUX.M3.pas',
+  LUX.M4 in '_LIBRARY\LUXOPHIA\LUX\LUX.M4.pas',
+  LUX.D2.M4 in '_LIBRARY\LUXOPHIA\LUX\LUX.D2.M4.pas',
+  LUX.D2.V4 in '_LIBRARY\LUXOPHIA\LUX\LUX.D2.V4.pas',
+  LUX.D3.M4 in '_LIBRARY\LUXOPHIA\LUX\LUX.D3.M4.pas',
+  LUX.D3.V4 in '_LIBRARY\LUXOPHIA\LUX\LUX.D3.V4.pas';
 
 {$R *.res}
 
