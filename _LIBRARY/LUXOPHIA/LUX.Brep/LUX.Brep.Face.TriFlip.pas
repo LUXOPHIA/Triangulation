@@ -2,7 +2,7 @@
 
 interface //#################################################################### ■
 
-uses LUX, LUX.D3, LUX.Graph.Tree, LUX.Brep.Poin;
+uses LUX, LUX.D3, LUX.Data.Tree, LUX.Brep.Poin;
 
 type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【型】
 
