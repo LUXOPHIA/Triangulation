@@ -45,14 +45,14 @@ implementation //###############################################################
 
 function TForm1.ScrToPos( const S_:TPointF ) :TSingle2D;
 begin
-     Result := S_ - TPointF.Create( PaintBox1.Width  / 2,
-                                    PaintBox1.Height / 2 );
+     Result.X := S_.X - PaintBox1.Width  / 2       ;
+     Result.Y :=        PaintBox1.Height / 2 - S_.Y;
 end;
 
 function TForm1.PosToScr( const P_:TSingle2D ) :TPointF;
 begin
-     Result := TPointF( P_ ) + TPointF.Create( PaintBox1.Width  / 2,
-                                               PaintBox1.Height / 2 );
+     Result.X := P_.X + PaintBox1.Width  / 2       ;
+     Result.Y :=        PaintBox1.Height / 2 - P_.Y;
 end;
 
 //------------------------------------------------------------------------------
